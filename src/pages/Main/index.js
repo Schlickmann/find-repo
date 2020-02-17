@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { FaGithubAlt } from 'react-icons/fa';
 import RepositoriesField from '../../components/RepositoriesField';
 import api from '../../services/api';
@@ -103,7 +104,9 @@ export default function Main() {
         {selectedRepos.map(repo => (
           <li key={repo.name}>
             <span>{repo.name}</span>
-            <a href="">Details</a>
+            <Link to={`/repository/${encodeURIComponent(repo.name)}`}>
+              Details
+            </Link>
           </li>
         ))}
       </List>
