@@ -1,37 +1,5 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  max-width: 700px;
-  background-color: #fff;
-  border-radius: 4px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  padding: 30px;
-  margin: 80px auto;
-
-  h1 {
-    font-size: 20px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    svg {
-      margin-right: 10px;
-    }
-  }
-`;
-
-export const Form = styled.form`
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-
-  & > div {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 15px;
-  }
-`;
-
 export const FieldSection = styled.div`
   flex: 1;
   width: 100%;
@@ -45,6 +13,25 @@ export const FieldSection = styled.div`
     color: #5fa8d3;
     padding-top: 20px;
     border: none;
+  }
+
+  button {
+    background-color: #cf1322;
+    color: #fff;
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    width: 16px;
+    height: 16px;
+    border: none;
+    border-radius: 50%;
+    outline: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  input:valid ~ button {
+    opacity: 1;
   }
 
   input:focus + label > span,
@@ -104,5 +91,41 @@ export const SubmitButton = styled.button.attrs({
 
   &:hover {
     background-color: #1c749c;
+  }
+`;
+
+export const SelectFieldWrapper = styled.div`
+  width: 100%;
+  position: relative;
+
+  ul {
+    list-style: none;
+    text-align: left;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    max-height: 200px;
+    overflow: auto;
+    border: ${props => (props.emptyList ? 'none' : '')};
+
+    li {
+      padding: 10px 5px;
+      cursor: pointer;
+      border-bottom: 1px dotted #ccc;
+      background-color: ${props => (props.active ? '#f0f0f0' : '#fff')};
+
+      &:last-child {
+        border-bottom: none;
+        border-radius: 0 0 5px 5px;
+      }
+
+      &:hover {
+        background-color: #b5f5ec;
+      }
+    }
+  }
+
+  ul::before {
+    content: '';
   }
 `;
