@@ -130,11 +130,8 @@ export const SyncIcon = styled(FaSyncAlt).attrs({
   size: 14,
 })`
   ${props =>
-    props.loading
-      ? css`
-          animation: ${rotate} 2s linear infinite;
-        `
-      : css`
-          animation: none;
-        `}
+    props.loading &&
+    css`
+      animation: ${rotate} 2s linear infinite;
+    `}
 `;
