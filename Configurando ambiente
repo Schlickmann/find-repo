@@ -1,0 +1,55 @@
+Configurando ambiente
+
+- Editor Config
+  -> create .editorconfig
+
+
+- Eslint (Procura por erros na style guide)
+  - yarn add eslint -D
+    * yarn eslint --init
+      -> To check syntax, find problems, and enforce code style
+      -> JavaScript modules (import/export)
+      -> React
+      -> Browser
+      -> Use a popular style guide
+      -> Airbnb
+      -> JavaScript
+    * remove package-lock.json
+    * yarn
+
+
+- Prettier (Deixa o codigo mais bonito)
+  - yarn add prettier eslint-config-prettier eslint-plugin-prettier babel-eslint -D
+
+
+Editar eslintrc.js
+  - extends -> 'prettier', 'prettier/react'
+  - add opcao -> parser: 'babel-eslint'
+  - plugins -> 'prettier'
+  - add rules
+    -> 'prettier/prettier': 'error',
+    -> 'react/jsx-filename-extension': [
+          'warn',
+          { extensions: ['.jsx', '.js'] }
+        ],
+    -> 'import/prefer-default-export': 'off'
+
+Criar .prettierrc
+  -> {
+        "singleQuote": true,
+        "trailingComma": "es5"
+      }
+
+
+
+
+### Navegacao
+
+- React router dom
+  -> yarn add react-router-dom
+
+  * BrowserRouter -> Navegacao entre paginas usando /
+  * Switch -> Garante que uma rota seja chamada por vez
+  * Route -> Rota para o component
+
+Finalizado o routes.js importar no component raiz e.g. App.js
