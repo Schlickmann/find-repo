@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
+import { FaSyncAlt } from 'react-icons/fa';
 
 export const Container = styled.div`
   max-width: 700px;
@@ -89,9 +90,10 @@ export const Label = styled.label`
   }
 `;
 
-export const SubmitButton = styled.button.attrs({
+export const SubmitButton = styled.button.attrs(props => ({
   type: 'submit',
-})`
+  disabled: props.loading,
+}))`
   background-color: #5fa8d3;
   border: 0;
   padding: 0 15px;
@@ -105,4 +107,34 @@ export const SubmitButton = styled.button.attrs({
   &:hover {
     background-color: #1c749c;
   }
+
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+`;
+
+// Create the keyframes
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+export const SyncIcon = styled(FaSyncAlt).attrs({
+  color: '#fff',
+  size: 14,
+})`
+  ${props =>
+    props.loading
+      ? css`
+          animation: ${rotate} 2s linear infinite;
+        `
+      : css`
+          animation: none;
+        `}
 `;

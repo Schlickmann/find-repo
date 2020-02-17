@@ -1,20 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import { FaGithubAlt, FaSync } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { FaGithubAlt } from 'react-icons/fa';
 import RepositoriesField from '../../components/RepositoriesField';
 import api from '../../services/api';
 
-import { Container, Form, FieldSection, Label, SubmitButton } from './styles';
+import {
+  Container,
+  Form,
+  FieldSection,
+  Label,
+  SubmitButton,
+  SyncIcon,
+} from './styles';
 
 export default function Main() {
   const [username, setUsername] = useState('');
   const [repositories, setRepositories] = useState([]);
+  const [selectedRepos, setSelectedRepos] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   async function handleSync(event) {
     event.preventDefault();
 
+    setIsLoading(true);
+
     const { data } = await api.get(`/users/${username}/repos`);
 
     setRepositories(data.map(repo => repo.name));
+    setIsLoading(false);
   }
 
   function handleInputChange(event) {
@@ -23,6 +35,16 @@ export default function Main() {
     if (!event.target.value.trim()) {
       setRepositories([]);
     }
+  }
+
+  async function handleSelection(repo) {
+    const response = await api.get(`/repos/${username}/${repo}`);
+
+    const data = {
+      name: response.data.full_name,
+    };
+
+    setSelectedRepos([...selectedRepos, data]);
   }
 
   return (
@@ -49,12 +71,17 @@ export default function Main() {
             </Label>
           </FieldSection>
 
-          <SubmitButton>
-            <FaSync color="#fff" size={14} />
+          <SubmitButton loading={isLoading ? 1 : 0}>
+            <SyncIcon loading={isLoading ? 1 : 0} />
           </SubmitButton>
         </div>
 
-        {repositories.length > 0 && <RepositoriesField repos={repositories} />}
+        {repositories.length > 0 && (
+          <RepositoriesField
+            repos={repositories}
+            onSelection={handleSelection}
+          />
+        )}
       </Form>
     </Container>
   );

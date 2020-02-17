@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FaPlus } from 'react-icons/fa';
 import { FieldSection, Label, SelectFieldWrapper, List } from './styles';
 
-function RepositoriesField({ repos }) {
+function RepositoriesField({ repos, onSelection }) {
   // Local states and references initialization
   const [cursor, setCursor] = useState(0);
   const [text, setText] = useState('');
@@ -24,15 +24,16 @@ function RepositoriesField({ repos }) {
     if (value.length > 2) {
       // Filtering repositories
       const regex = new RegExp(`${value}`, 'i');
-      options = repos.sort().filter(city => regex.test(city));
+      options = repos.sort().filter(repo => regex.test(repo));
     }
 
     setSuggestions(options);
     setText(value);
   }
 
-  function handleCitySelection(city) {
-    setText(city);
+  function handleRepoSelection(repo) {
+    onSelection(repo);
+    setText(repo);
     setSuggestions([]);
     setCursor(0);
   }
@@ -83,7 +84,7 @@ function RepositoriesField({ repos }) {
           <li
             activeitem={cursor === index ? 1 : 0}
             ref={el => (itemsRef.current[index] = el)}
-            onClick={() => handleCitySelection(repo)}
+            onClick={() => handleRepoSelection(repo)}
             key={index}
           >
             {repo}
@@ -96,6 +97,7 @@ function RepositoriesField({ repos }) {
 
 RepositoriesField.propTypes = {
   repos: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onSelection: PropTypes.func.isRequired,
 };
 
 export default RepositoriesField;
