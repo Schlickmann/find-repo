@@ -108,12 +108,13 @@ export const List = styled.ul`
   max-height: 200px;
   overflow: auto;
   border: ${props => (props.emptylist ? 'none' : '')};
+  border-radius: 0 0 5px 5px;
 
   li {
     padding: 10px 5px;
     cursor: pointer;
     border-bottom: 1px dotted #ccc;
-    background-color: ${props => (props.activeitem ? '#f0f0f0' : '#fff')};
+    background-color: #fff;
 
     &:last-child {
       border-bottom: none;
@@ -123,6 +124,10 @@ export const List = styled.ul`
     &:hover {
       background-color: #ccf6ff;
     }
+  }
+
+  li.active {
+    background-color: #f0f0f0;
   }
 
   &::before {

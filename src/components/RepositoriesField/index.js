@@ -82,7 +82,7 @@ function RepositoriesField({ repos, onSelection }) {
       <List ref={listRef} emptylist={suggestions.length > 0 ? 0 : 1}>
         {suggestions.map((repo, index) => (
           <li
-            activeitem={cursor === index ? 1 : 0}
+            className={cursor === index ? 'active' : ''}
             ref={el => (itemsRef.current[index] = el)}
             onClick={() => handleRepoSelection(repo)}
             key={index}
