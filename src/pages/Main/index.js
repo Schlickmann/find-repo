@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaGithubAlt } from 'react-icons/fa';
 import RepositoriesField from '../../components/RepositoriesField';
 import api from '../../services/api';
@@ -18,6 +18,20 @@ export default function Main() {
   const [repositories, setRepositories] = useState([]);
   const [selectedRepos, setSelectedRepos] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  // It loads data from localstorage
+  useEffect(() => {
+    const repos = localStorage.getItem('repositories');
+
+    if (repos) {
+      setSelectedRepos(JSON.parse(repos));
+    }
+  }, []);
+
+  //  It saves data into localstorage
+  useEffect(() => {
+    localStorage.setItem('repositories', JSON.stringify(selectedRepos));
+  }, [selectedRepos]);
 
   async function handleSync(event) {
     event.preventDefault();
