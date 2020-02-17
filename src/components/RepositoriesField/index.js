@@ -1,20 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { FaPlus } from 'react-icons/fa';
-import { FieldSection, Label, SelectFieldWrapper } from './styles';
+import { FieldSection, Label, SelectFieldWrapper, List } from './styles';
 
-function RepositoriesField() {
+function RepositoriesField({ repos }) {
   // Local states and references initialization
   const [cursor, setCursor] = useState(0);
-  const [cities, setCities] = useState([]);
   const [text, setText] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const listRef = useRef(null);
   const itemsRef = useRef([]);
-
-  // Loading cities
-  useEffect(() => {
-    // setCities(canadianCities);
-  }, []);
 
   useEffect(() => {
     // Update references on suggestions change
@@ -27,9 +22,9 @@ function RepositoriesField() {
     let options = [];
 
     if (value.length > 2) {
-      // Filtering cities
+      // Filtering repositories
       const regex = new RegExp(`${value}`, 'i');
-      options = cities.sort().filter(city => regex.test(city));
+      options = repos.sort().filter(city => regex.test(city));
     }
 
     setSuggestions(options);
@@ -83,20 +78,24 @@ function RepositoriesField() {
           X
         </button>
       </FieldSection>
-      <ul ref={listRef} emptyList={!(suggestions.length > 0)}>
-        {suggestions.map((city, index) => (
+      <List ref={listRef} emptylist={suggestions.length > 0 ? 0 : 1}>
+        {suggestions.map((repo, index) => (
           <li
-            active={cursor === index}
+            activeitem={cursor === index ? 1 : 0}
             ref={el => (itemsRef.current[index] = el)}
-            onClick={() => handleCitySelection(city)}
+            onClick={() => handleCitySelection(repo)}
             key={index}
           >
-            {city}
+            {repo}
           </li>
         ))}
-      </ul>
+      </List>
     </SelectFieldWrapper>
   );
 }
+
+RepositoriesField.propTypes = {
+  repos: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 export default RepositoriesField;

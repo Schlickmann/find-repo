@@ -25,7 +25,7 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
 
-  & > div {
+  & > div.flex-child {
     display: flex;
     flex-direction: row;
     margin-bottom: 15px;

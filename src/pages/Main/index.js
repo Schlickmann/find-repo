@@ -1,13 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { FaGithubAlt, FaSync } from 'react-icons/fa';
 import RepositoriesField from '../../components/RepositoriesField';
+import api from '../../services/api';
+
 import { Container, Form, FieldSection, Label, SubmitButton } from './styles';
 
 export default function Main() {
   const [username, setUsername] = useState('');
   const [repositories, setRepositories] = useState([]);
 
-  function handleSync() {}
+  async function handleSync(event) {
+    event.preventDefault();
+
+    const { data } = await api.get(`/users/${username}/repos`);
+
+    setRepositories(data.map(repo => repo.name));
+  }
+
+  function handleInputChange(event) {
+    setUsername(event.target.value);
+
+    if (!event.target.value.trim()) {
+      setRepositories([]);
+    }
+  }
 
   return (
     <Container>
@@ -17,7 +33,7 @@ export default function Main() {
       </h1>
 
       <Form onSubmit={handleSync}>
-        <div>
+        <div className="flex-child">
           <FieldSection>
             <input
               type="text"
@@ -26,19 +42,19 @@ export default function Main() {
               required
               autoComplete="off"
               value={username}
-              onChange={event => setUsername(event.target.value)}
+              onChange={handleInputChange}
             />
             <Label htmlFor="user">
               <span>Github Username</span>
             </Label>
           </FieldSection>
 
-          <SubmitButton disabled>
+          <SubmitButton>
             <FaSync color="#fff" size={14} />
           </SubmitButton>
         </div>
 
-        {repositories.length > 0 && <RepositoriesField />}
+        {repositories.length > 0 && <RepositoriesField repos={repositories} />}
       </Form>
     </Container>
   );

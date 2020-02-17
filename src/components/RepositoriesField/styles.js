@@ -97,35 +97,35 @@ export const SubmitButton = styled.button.attrs({
 export const SelectFieldWrapper = styled.div`
   width: 100%;
   position: relative;
+`;
 
-  ul {
-    list-style: none;
-    text-align: left;
-    position: absolute;
-    left: 0;
-    width: 100%;
-    max-height: 200px;
-    overflow: auto;
-    border: ${props => (props.emptyList ? 'none' : '')};
+export const List = styled.ul`
+  list-style: none;
+  text-align: left;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow: auto;
+  border: ${props => (props.emptylist ? 'none' : '')};
 
-    li {
-      padding: 10px 5px;
-      cursor: pointer;
-      border-bottom: 1px dotted #ccc;
-      background-color: ${props => (props.active ? '#f0f0f0' : '#fff')};
+  li {
+    padding: 10px 5px;
+    cursor: pointer;
+    border-bottom: 1px dotted #ccc;
+    background-color: ${props => (props.activeitem ? '#f0f0f0' : '#fff')};
 
-      &:last-child {
-        border-bottom: none;
-        border-radius: 0 0 5px 5px;
-      }
+    &:last-child {
+      border-bottom: none;
+      border-radius: 0 0 5px 5px;
+    }
 
-      &:hover {
-        background-color: #b5f5ec;
-      }
+    &:hover {
+      background-color: #ccf6ff;
     }
   }
 
-  ul::before {
+  &::before {
     content: '';
   }
 `;
