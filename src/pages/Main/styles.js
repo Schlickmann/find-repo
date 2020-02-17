@@ -135,3 +135,25 @@ export const SyncIcon = styled(FaSyncAlt).attrs({
       animation: ${rotate} 2s linear infinite;
     `}
 `;
+
+export const List = styled.ul`
+  list-style: none;
+  margin-top: 30px;
+
+  li {
+    padding: 15px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    & + li {
+      border-top: 1px dotted #eee;
+    }
+
+    a {
+      color: #5fa8d3;
+      text-decoration: none;
+    }
+  }
+`;

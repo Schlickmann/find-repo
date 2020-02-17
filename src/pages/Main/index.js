@@ -10,6 +10,7 @@ import {
   Label,
   SubmitButton,
   SyncIcon,
+  List,
 } from './styles';
 
 export default function Main() {
@@ -83,6 +84,15 @@ export default function Main() {
           />
         )}
       </Form>
+
+      <List>
+        {selectedRepos.map(repo => (
+          <li key={repo.name}>
+            <span>{repo.name}</span>
+            <a href="">Details</a>
+          </li>
+        ))}
+      </List>
     </Container>
   );
 }
