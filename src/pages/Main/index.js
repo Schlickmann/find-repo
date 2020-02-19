@@ -4,8 +4,8 @@ import { FaGithubAlt } from 'react-icons/fa';
 import RepositoriesField from '../../components/RepositoriesField';
 import api from '../../services/api';
 
+import Container from '../../components/Container';
 import {
-  Container,
   Form,
   FieldSection,
   Label,

@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { FaAngleLeft } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import api from '../../services/api';
 
-import { Loading, LoadingIcon } from './styles';
+import Container from '../../components/Container';
+import { Loading, LoadingIcon, Owner } from './styles';
 
 export default function Repository({ match }) {
   const [repo, setRepo] = useState({});
@@ -41,9 +44,17 @@ export default function Repository({ match }) {
   }
 
   return (
-    <>
-      <h1>Repo: {repo.name}</h1>
-    </>
+    <Container>
+      <Owner>
+        <Link to="/">
+          <FaAngleLeft size={18} />
+          <span>Back</span>
+        </Link>
+        <img src={repo.owner.avatar_url} alt={repo.owner.login} />
+        <h1>{repo.name}</h1>
+        <p>{repo.description}</p>
+      </Owner>
+    </Container>
   );
 }
 
