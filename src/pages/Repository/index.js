@@ -68,7 +68,11 @@ export default function Repository({ match }) {
                 >
                   {issue.title}
                 </a>
-                {/* Labels */}
+                <div className="labels">
+                  {issue.labels.map(label => (
+                    <span key={String(label.id)}>{label.name}</span>
+                  ))}
+                </div>
               </strong>
               <p>{issue.user.login}</p>
             </div>

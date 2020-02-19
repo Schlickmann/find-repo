@@ -98,6 +98,8 @@ export const IssuesList = styled.ul`
     margin-left: 15px;
 
     strong {
+      display: block;
+      width: 100%;
       font-size: 1rem;
 
       a {
@@ -108,12 +110,32 @@ export const IssuesList = styled.ul`
           color: #1c749c;
         }
       }
+
+      span {
+        background-color: #eefbff;
+        color: #333;
+        border-radius: 2px;
+        font-size: 12px;
+        font-weight: 600;
+        height: 20px;
+        padding: 3px 4px;
+        margin-left: 10px;
+      }
     }
 
     p {
       margin-top: 5px;
       font-size: 12px;
       color: #999;
+    }
+  }
+
+  div.labels {
+    margin-top: 5px;
+    margin-left: 0;
+
+    span:first-child {
+      margin-left: 0;
     }
   }
 `;
