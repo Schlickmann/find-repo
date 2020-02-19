@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import api from '../../services/api';
 
 import Container from '../../components/Container';
-import { Loading, LoadingIcon, Owner } from './styles';
+import { Loading, LoadingIcon, Owner, IssuesList } from './styles';
 
 export default function Repository({ match }) {
   const [repo, setRepo] = useState({});
@@ -54,6 +54,27 @@ export default function Repository({ match }) {
         <h1>{repo.name}</h1>
         <p>{repo.description}</p>
       </Owner>
+
+      <IssuesList>
+        {issues.map(issue => (
+          <li key={String(issue.id)}>
+            <img src={issue.user.avatar_url} alt={issue.user.login} />
+            <div>
+              <strong>
+                <a
+                  href={issue.html_url}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {issue.title}
+                </a>
+                {/* Labels */}
+              </strong>
+              <p>{issue.user.login}</p>
+            </div>
+          </li>
+        ))}
+      </IssuesList>
     </Container>
   );
 }
