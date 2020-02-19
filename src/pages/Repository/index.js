@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import api from '../../services/api';
 
-// import { Container } from './styles';
+import { Loading, LoadingIcon } from './styles';
 
 export default function Repository({ match }) {
   const [repo, setRepo] = useState({});
@@ -30,6 +30,15 @@ export default function Repository({ match }) {
 
     loadInfo();
   }, []);
+
+  if (isLoading) {
+    return (
+      <Loading>
+        <LoadingIcon loading={isLoading ? 1 : 0} />
+        <span>Loading...</span>
+      </Loading>
+    );
+  }
 
   return (
     <>
